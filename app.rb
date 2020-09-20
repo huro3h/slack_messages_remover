@@ -5,7 +5,17 @@ WEEK = DAY * 7
 PREVIOUS_WEEK = Time.now - WEEK
 
 APP_TOKEN = ENV['APP_TOKEN']
-CHANNEL_ID = ENV['CHANNEL_ID']
+CHANNEL_ID = ENV['CHANNEL']
+
+# return [boolean] システム, BotのメッセージはTrueを返す
+def system_message?(message)
+  !message.subtype.nil?
+end
+
+# return [Array] 取得したメッセージから1週間以上前かつ、自動投稿のメッセージを返す(削除対象)
+def outside_messages(messages)
+  messages.select{ |message| message.ts < PREVIOUS_WEEK.to_s && system_message?(message) }
+end
 
 def lambda_handler(event:, context:)
   Slack.configure do |config|
@@ -20,11 +30,6 @@ def lambda_handler(event:, context:)
 
   target_messages.each do |target_message|
     client.chat_delete(channel: CHANNEL_ID, ts: target_message.ts)
-    sleep(Random.rand(3))
+    sleep(Random.rand(2))
   end
-end
-
-# return [Array] メッセージの配列から1週間以上前のメッセージを返す(削除対象)
-def outside_messages(messages)
-  messages.select{ |message| message.ts < PREVIOUS_WEEK.to_s }
 end
