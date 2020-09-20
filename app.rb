@@ -5,7 +5,7 @@ WEEK = DAY * 7
 PREVIOUS_WEEK = Time.now - WEEK
 
 APP_TOKEN = ENV['APP_TOKEN']
-CHANNEL_ID = ENV['CHANNEL']
+CHANNEL_ID = ENV['CHANNEL_ID']
 
 # return [boolean] システム, BotのメッセージはTrueを返す
 def system_message?(message)
