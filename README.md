@@ -1,1 +1,2 @@
-# slack_messages_remover
+### slack_messages_remover
+with AWS Lambda
