@@ -14,7 +14,7 @@ end
 
 # return [Array] 取得したメッセージから1週間以上前かつ、自動投稿のメッセージを返す(削除対象)
 def outside_messages(messages)
-  messages.select{ |message| message.ts < PREVIOUS_WEEK.to_s && system_message?(message) }
+  messages.select{ |message| message.ts.to_i < PREVIOUS_WEEK.to_i && system_message?(message) }
 end
 
 def lambda_handler(event:, context:)
