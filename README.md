@@ -47,7 +47,7 @@ WorkSpaceのチャンネル一覧を取得して
 
 
 ### 4. TesterでコマンドをAPI経由で叩いて通るかチェック
-例: チャット一覧を取得:conversations.list
+例: チャット一覧を取得:conversations.list  
 https://api.slack.com/methods/conversations.list/test  
   
 トークンやらチャンネルなど必要な値を入れて  
