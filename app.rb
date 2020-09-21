@@ -24,9 +24,10 @@ def lambda_handler(event:, context:)
 
   client = Slack::Web::Client.new
   messages = client.conversations_history(channel: CHANNEL_ID, count: 20)['messages']
-  target_messages = outside_messages(messages).reverse
 
   return if messages.empty?
+
+  target_messages = outside_messages(messages).reverse
 
   target_messages.each do |target_message|
     client.chat_delete(channel: CHANNEL_ID, ts: target_message.ts)
